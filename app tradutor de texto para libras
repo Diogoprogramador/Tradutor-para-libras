@@ -1,0 +1,38 @@
+import tkinter as tk
+
+# Mapeamento de caracteres para Braille ASCII
+braille_dict = {
+    'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛', 'h': '⠓', 'i': '⠊', 'j': '⠚',
+    'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞',
+    'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
+    'A': '⠁', 'B': '⠃', 'C': '⠉', 'D': '⠙', 'E': '⠑', 'F': '⠋', 'G': '⠛', 'H': '⠓', 'I': '⠊', 'J': '⠚',
+    'K': '⠅', 'L': '⠇', 'M': '⠍', 'N': '⠝', 'O': '⠕', 'P': '⠏', 'Q': '⠟', 'R': '⠗', 'S': '⠎', 'T': '⠞',
+    'U': '⠥', 'V': '⠧', 'W': '⠺', 'X': '⠭', 'Y': '⠽', 'Z': '⠵',
+    '1': '⠼⠁', '2': '⠼⠃', '3': '⠼⠉', '4': '⠼⠙', '5': '⠼⠑', '6': '⠼⠋', '7': '⠼⠛', '8': '⠼⠓', '9': '⠼⠊', '0': '⠼⠚',
+    ' ': ' ', '.': '⠲', ',': '⠂', ';': '⠆', ':': '⠒', '!': '⠖', '?': '⠦', '(': '⠐⠣', ')': '⠐⠜', '-': '⠤', '/': '⠌'
+}
+
+def traduzir_para_braille(texto):
+    braille_texto = ''.join(braille_dict.get(char, char) for char in texto)
+    return braille_texto
+
+def traduzir():
+    texto = entrada.get("1.0", tk.END).strip()
+    braille = traduzir_para_braille(texto)
+    saida.delete("1.0", tk.END)
+    saida.insert(tk.END, braille)
+
+app = tk.Tk()
+app.title("Tradutor para Braille")
+
+tk.Label(app, text="Digite o texto:").pack()
+entrada = tk.Text(app, height=10, width=50)
+entrada.pack()
+
+tk.Button(app, text="Traduzir", command=traduzir).pack()
+
+tk.Label(app, text="Tradução em Braille:").pack()
+saida = tk.Text(app, height=10, width=50)
+saida.pack()
+
+app.mainloop()
